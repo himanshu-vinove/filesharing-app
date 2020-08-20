@@ -1,0 +1,55 @@
+<h1 style="text-align: center;">User Dashboard</h1>
+
+  <!-- <table class="table table-striped text-center table-hover"> -->
+   <table class="table table-bordered table-dark">
+      
+      <tbody>
+        <tr *ngFor='let user of users;index as i'>
+          <td scope="row"><img
+            src="http://127.0.0.1:3000/api/{{ user.profile }}"
+           
+            alt="{{ user.name }}"
+            height="20%"
+            width="10%"
+          />
+    </td>
+          <td><b>{{user.username}}</b></td>
+          <td><Button class="btn btn-primary btn-block"
+            (click)="addFriend(user._id)">
+          Add Friend <i class="fa fa-handshake-o"></i></Button></td>
+        </tr>
+      </tbody>
+    </table>
+  
+
+  <div class="container">
+    <nav class="navbar">
+      <a class="navbar-brand" style="color: aliceblue;" >Friends Search </a>
+        <form class="form-inline">
+          <div class="form-group">
+            <input class="form-control mr-sm-2" name="searchsText" type="search" [(ngModel)]="searchText" placeholder="Search" aria-label="Search">
+          </div>
+          </form>
+    </nav>
+    <hr>
+    <table class="table table-bordered table-dark">
+      
+      <tbody>
+        <tr *ngFor="let friend of friendList | filter:searchText index as i">
+          <td scope="row"><img
+            src="http://127.0.0.1:3000/api/{{ friend.profile }}"
+           
+            alt="{{ friend.name }}"
+            height="20%"
+            width="10%"
+          />
+    </td>
+          <td><b>{{friend.username}}</b></td>
+          <td><Button class="btn btn-primary btn-block"
+            (click)="sendFile()">
+          send File </Button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+ 
