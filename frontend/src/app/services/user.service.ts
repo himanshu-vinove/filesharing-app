@@ -33,6 +33,7 @@ export class UserService {
       map((result: LoginResponse) => {
         localStorage.setItem('token', 'Bearer ' + result.token);
         localStorage.setItem('id', result.id);
+        localStorage.setItem('role', result.role);
         this.loginObservable.next({});
         return result;
       })

@@ -1,4 +1,15 @@
-<h1 style="text-align: center;">User Dashboard</h1>
+<nav  class="navbar navbar-expand-lg navbar-dark bgcolor" style="background:rgb(34, 80, 178)"><a href="#" class="navbar-brand">
+  <img src="https://thumbs.dreamstime.com/z/rocket-idea-icon-logo-design-element-can-be-used-as-as-complement-to-95682747.jpg" height="28" alt="CoolBrand">
+</a>
+<a class="navbar-brand" routerLink="" style="color: aliceblue;"> User Dashboard</a>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item" >
+      <button class="nav-link text-dark " routerLink='../aboutus' class="nav-link text-dark" >upload File</button></li>
+      
+  </ul>
+  
+  
+</nav>
 
   <!-- <table class="table table-striped text-center table-hover"> -->
    <table class="table table-bordered table-dark">
@@ -15,7 +26,7 @@
     </td>
           <td><b>{{user.username}}</b></td>
           <td><Button class="btn btn-primary btn-block"
-            (click)="addFriend(user._id)">
+            (click)="addFriend(user._id)"  >
           Add Friend <i class="fa fa-handshake-o"></i></Button></td>
         </tr>
       </tbody>
@@ -48,6 +59,9 @@
           <td><Button class="btn btn-primary btn-block"
             (click)="sendFile()">
           send File </Button></td>
+          <td><Button class="btn btn-secondary btn-block"
+            (click)="removeFriend()">
+          Remove Friend </Button></td>
         </tr>
       </tbody>
     </table>

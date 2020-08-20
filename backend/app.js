@@ -41,6 +41,17 @@ app.use('/api/uploads*', (req, res, next) => {
     next();
   }
 });
+// Mail verification
+app.get('/confirmation/:token', async (req, res) => {
+  try {
+    const decodedToken = jwt.verify(req.params.token, process.env.JWT_SECRET);
+    // console.log(decodedToken);
+    await User.findByIdAndUpdate(decodedToken.id, { verifiedUser: true } );
+    res.redirect('http://localhost:4200/login');
+  } catch (e) {
+    res.send('error');
+  }
+});
 
 
 module.exports = app;

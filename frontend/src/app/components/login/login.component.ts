@@ -10,9 +10,21 @@ import { NgForm } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   isLoggedIn = false;
+  role;
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
+    this.userService._loginObservable.subscribe(() => {
+      this.isLoggedIn = this.userService.isLoggedIn();
+      this.role = localStorage.getItem('role');
+      if (this.role === 'admin') {
+        this.router.navigate(['adminDashboard']);
+      }
+      if (this.role === 'user') {
+        this.router.navigate(['userDashboard']);
+      }
+    });
+
   }
 
   onSubmit(form: NgForm): any {

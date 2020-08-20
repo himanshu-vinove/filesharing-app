@@ -1,5 +1,6 @@
 const ErrorResponse = require('../../utils/errorResponse');
 const User = require('../models/User');
+const nodemailer = require("nodemailer");
 
 // Create Single User
 exports.createUser = async (req, res, next) => {
@@ -10,9 +11,28 @@ exports.createUser = async (req, res, next) => {
       password: req.body.password,
       profile: req.file.path
     }
-    await User.create(user);
+    const createdUser = await User.create(user);
+    const emailToken = createdUser.getSignedJwtToken();
+    // console.log(emailToken);
+    const url = `http://localhost:3000/confirmation/${emailToken}`;
+
+    let testAccount = await nodemailer.createTestAccount();
+    let transporter = nodemailer.createTransport({
+      host: "smtp.mailtrap.io",
+      auth: {
+        user: "85e4bc49ccb24a",
+        pass: "db01923d832292",
+      },
+    });
+    let mail = await transporter.sendMail({
+      from: testAccount.user,
+      to: req.body.email,
+      subject: "Confirm Email",
+      html: `Please click this link to confirm your email: <a href="${url}">${url}</a>`,
+    });
+    // console.log(mail);
     res.status(201).json({
-      msg: 'User Created Successfully',
+      msg: "User Created Successfully",
     });
   } catch (err) {
     return next(
@@ -20,6 +40,7 @@ exports.createUser = async (req, res, next) => {
     );
   }
 };
+
 
 // login User
 exports.loginUserAndAdmin = async (req, res, next) => {

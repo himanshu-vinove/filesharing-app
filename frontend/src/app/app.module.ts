@@ -15,7 +15,8 @@ import { AdminsidebarComponent } from './components/adminsidebar/adminsidebar.co
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { TermsConditionsComponent } from './components/terms-conditions/terms-conditions.component';
-
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { TermsConditionsComponent } from './components/terms-conditions/terms-co
     AdminsidebarComponent,
     AboutUsComponent,
     TermsConditionsComponent,
+    FileUploadComponent,
    
    
   ],
@@ -37,7 +39,8 @@ import { TermsConditionsComponent } from './components/terms-conditions/terms-co
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    InfiniteScrollModule
   ],
   providers: [
     {

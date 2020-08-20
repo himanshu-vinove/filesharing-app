@@ -4,11 +4,18 @@
       <div class="col-md-12 p-0">
         <!-- Website Overview -->
         <!-- <div class="card"> -->
-          <h5 class="card-header"  style="background: #0594b8; text-align: center;"><a href="#" class="navbar-brand">
+          <nav  class="navbar navbar-expand-lg navbar-dark bgcolor" style="background: #0594b8;"><a href="#" class="navbar-brand">
             <img src="https://thumbs.dreamstime.com/z/rocket-idea-icon-logo-design-element-can-be-used-as-as-complement-to-95682747.jpg" height="28" alt="CoolBrand">
         </a>
-            <b>Admin Dashboard</b>
-          </h5>
+        <a class="navbar-brand" routerLink="" style="color: aliceblue;">Admin Dashboard</a>
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item" >
+                <a class="nav-link text-dark " routerLink='../aboutus' class="nav-link text-dark" >About Us</a></li>
+                <li><a routerLink='../terms' class="nav-link text-dark mr-auto">Terms & conditions</a></li>
+            </ul>
+            
+            
+        </nav>
          
           <hr>
           <div class="progress" style="height: 20px;">
@@ -23,14 +30,14 @@
             </div>
             <div class="col-md-4">
               <div class="well dash-box border border-dark shadow p-3 mb-3 bg-white">
-                <h2><i class="fa fa-check-square-o"></i> 2</h2>
+                <h2><i class="fa fa-check-square-o"></i> {{ activeUsers.length -1}}</h2>
                 <h4>Active Users</h4>
               </div>
             </div>
             <div class="col-md-4">
               <div class="well dash-box border border-dark shadow p-3 mb-3 bg-white">
-                <h2><i class="fa fa-drivers-license"></i> 743</h2>
-                <h4>Registered Users</h4>
+                <h2><i class="fa fa-drivers-license"></i> {{ users.length  }}</h2>
+                <h4>Total Members</h4>
               </div>
             </div>
           </div>
@@ -47,6 +54,14 @@
                 </div>
                 </form>
           </nav>
+          
+
+          <div class="search-results"
+          infiniteScroll
+          [infiniteScrollDistance]="1"
+          [infiniteScrollThrottle]="5"
+          (scrolled)="onScroll()"
+          [scrollWindow]="false">
           <div class="card-body">
             <table class="table table-striped text-center table-hover">
               <thead>
@@ -76,6 +91,13 @@
               </tbody>
             </table>
           </div>
+          </div>
+
+
+
+
+
+     
           <nav aria-label="...">
             <ul class="pagination">
               <li class="page-item disabled">
@@ -96,5 +118,22 @@
      
     </div>
   </section>
+   
+<footer class="footer" >
+  <div class="container-fluid">
+      <nav class="float-left">
+          <ul>
+              
+                  
+                      Developed By HK
+                  
+              
+          </ul>
+      </nav>
+      <div class="copyright float-right">
+          copyright &copy; 2020
+      </div>
+  </div>
+</footer>
 
       

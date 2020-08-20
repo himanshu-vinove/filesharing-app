@@ -10,11 +10,14 @@ export class UserDashboardComponent implements OnInit {
   users: [];
   friendList = [];
   searchText;
+  isLoggedIn = true;
+  role;
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
     this.getAllUsers();
     this.getFriendList();
+    this.role = localStorage.getItem('role');
   }
 
   getAllUsers(): any {
@@ -40,6 +43,12 @@ export class UserDashboardComponent implements OnInit {
 
 
   sendFile(): any{
+console.log("file sent");
 
+  }
+
+  removeFriend(): any{
+    console.log("friend removed");
+    
   }
 }
