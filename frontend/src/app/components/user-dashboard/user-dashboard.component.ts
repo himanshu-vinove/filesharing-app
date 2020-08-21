@@ -1,5 +1,8 @@
 import { UserService } from 'src/app/services/user.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-user-dashboard',
@@ -12,7 +15,7 @@ export class UserDashboardComponent implements OnInit {
   searchText;
   isLoggedIn = true;
   role;
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
     this.getAllUsers();
@@ -47,8 +50,15 @@ console.log("file sent");
 
   }
 
-  removeFriend(): any{
+  removeFriend(id): any{
+    this.userService.removeFromFriendList(id).subscribe();
     console.log("friend removed");
     
   }
+
+
+  uploadFile(): any{
+    this.router.navigate(['fileupload']);
+  }
+  
 }

@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
 
 import { TermsConditionsComponent } from './components/terms-conditions/terms-conditions.component';
 
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'adminDashboard', canActivate : [ UserAuthGuardService ], component: AdminDashboardComponent },
   { path: 'userDashboard', canActivate : [ UserAuthGuardService ], component: UserDashboardComponent },
+  { path: 'fileupload', canActivate : [ UserAuthGuardService ], component: FileUploadComponent  },
   { path: 'aboutus', component: AboutUsComponent },
   { path: 'terms', component: TermsConditionsComponent },
 

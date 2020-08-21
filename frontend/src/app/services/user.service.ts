@@ -78,6 +78,13 @@ export class UserService {
   getFriendList(): any {
     return this.http.get(`${this.friendUrl}/getfriendlist`);
   }
+
+removeFromFriendList(id): any{
+    return this.http.delete(`${this.friendUrl}/removefriend/${id}`, id);
+  
+  
+}
+
 }
 
 interface LoginResponse {

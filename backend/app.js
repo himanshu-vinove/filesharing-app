@@ -2,6 +2,9 @@ const express = require('express');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const User = require("./api/models/User");
+const jwt = require('jsonwebtoken');
+
 const userRoutes = require('./api/routes/user');
 const friendsRoute = require('./api/routes/friendlist');
 const fileRoutes = require('./api/routes/filedata');
@@ -11,11 +14,17 @@ dotenv.config({ path: './config/config.env' });
 
 // Connect to DB
 require('./config/db');
-
 const app = express();
 
 // Setup CORS
 app.use(cors());
+app.use(function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PATCH, DELETE, OPTIONS');
+  next();
+});
+
 
 // Use incoming requests
 app.use(express.json());
@@ -29,7 +38,7 @@ app.use('/uploads', express.static('uploads'));
 // Mount Routes
 app.use('/api/users', userRoutes);
  app.use('/api/friends', friendsRoute);
-// app.use('/api/files', fileRoutes);
+ app.use('/api/files', fileRoutes);
 
 // Upload
 app.use('/api/uploads*', (req, res, next) => {

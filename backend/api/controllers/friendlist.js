@@ -1,7 +1,7 @@
 const ErrorResponse = require("../../utils/errorResponse");
 const User = require("../models/User");
 
-// Add to friend List
+// Adding in friend List
 exports.addToFriendList = async (req, res, next) => {
   try {
     const user = await User.findById(req.userData.id);
@@ -19,7 +19,7 @@ exports.addToFriendList = async (req, res, next) => {
   }
 };
 
-// Get Friend List
+// Get Friends List
 exports.getFriendList = async (req, res, next) => {
   try {
     const user = await User.findById(req.userData.id);
@@ -43,6 +43,32 @@ exports.getFriendList = async (req, res, next) => {
     });
     // console.log(updatedUser.fListData);
     res.status(200).json(updatedUser.fListData);
+  } catch (err) {
+    return next(new ErrorResponse(`${err.message}`, 500));
+  }
+};
+
+
+//remove friend from list
+
+exports.removefiend = async (req, res, next) =>{
+  try {
+    const user = await User.findById(req.userData.id);
+
+    if (!user) {
+      return next(new ErrorResponse(`No user`, 404));
+    }
+    user.fListData.forEach(element => {
+      if (element._id === req.params.id) {
+        console.log(element._id);
+      }
+      
+    });
+   
+    // await User.findByIdAndUpdate(req.userData.id, {
+    //   friendList: user.friendList,
+    // });
+    res.status(200).json({ msg: "removed from friend list" });
   } catch (err) {
     return next(new ErrorResponse(`${err.message}`, 500));
   }

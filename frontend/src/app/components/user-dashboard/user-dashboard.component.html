@@ -1,10 +1,14 @@
+<section id="main" class="m-2">
+  <div class="container-fluid">
+
+
 <nav  class="navbar navbar-expand-lg navbar-dark bgcolor" style="background:rgb(34, 80, 178)"><a href="#" class="navbar-brand">
   <img src="https://thumbs.dreamstime.com/z/rocket-idea-icon-logo-design-element-can-be-used-as-as-complement-to-95682747.jpg" height="28" alt="CoolBrand">
 </a>
 <a class="navbar-brand" routerLink="" style="color: aliceblue;"> User Dashboard</a>
   <ul class="navbar-nav ml-auto">
     <li class="nav-item" >
-      <button class="nav-link text-dark " routerLink='../aboutus' class="nav-link text-dark" >upload File</button></li>
+      <button class="nav-link text-dark "  (click)="uploadFile()" class="nav-link text-dark" >upload File</button></li>
       
   </ul>
   
@@ -60,10 +64,11 @@
             (click)="sendFile()">
           send File </Button></td>
           <td><Button class="btn btn-secondary btn-block"
-            (click)="removeFriend()">
+            (click)="removeFriend(friend._id)">
           Remove Friend </Button></td>
         </tr>
       </tbody>
     </table>
   </div>
- 
+ </div>
+ </section>

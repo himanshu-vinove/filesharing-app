@@ -24,8 +24,8 @@ exports.userAuth = async (req, res, next) => {
         const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
         req.userData = decodedToken;
 
-        const user = await User.findById(req.userData.id);
-        decodedToken.userType = user.userType;
+        // const user = await User.findById(req.userData.id);
+        // decodedToken.userType = user.userType;
 
         next();
       } else {

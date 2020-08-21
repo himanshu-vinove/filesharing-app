@@ -102,6 +102,7 @@ exports.updateBlock = async(req, res, next) => {
     }
     user.blockedStatus = user.blockedStatus ? 'false' : 'true';
     await User.findByIdAndUpdate(req.params.id, { blockedStatus: user.blockedStatus });
+    
     console.log(user);
     res.status(200).json(user);
   } catch (err) {

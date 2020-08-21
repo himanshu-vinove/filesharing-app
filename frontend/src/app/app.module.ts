@@ -30,8 +30,7 @@ import { FileUploadComponent } from './components/file-upload/file-upload.compon
     AboutUsComponent,
     TermsConditionsComponent,
     FileUploadComponent,
-   
-   
+
   ],
   imports: [
     BrowserModule,
@@ -40,7 +39,8 @@ import { FileUploadComponent } from './components/file-upload/file-upload.compon
     ReactiveFormsModule,
     HttpClientModule,
     Ng2SearchPipeModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+  
   ],
   providers: [
     {

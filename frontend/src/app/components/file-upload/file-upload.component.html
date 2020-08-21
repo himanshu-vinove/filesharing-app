@@ -1,1 +1,128 @@
-<p>file-upload works!</p>
+<section id="main" class="m-2">
+   
+  
+  
+  <nav  class="navbar navbar-expand-lg navbar-dark bgcolor" style="background:rgb(34, 80, 178)" width="100%"><a href="#" class="navbar-brand">
+    <img src="https://thumbs.dreamstime.com/z/rocket-idea-icon-logo-design-element-can-be-used-as-as-complement-to-95682747.jpg" height="28" alt="CoolBrand">
+  </a>
+  <a class="navbar-brand" routerLink="" style="color: aliceblue;"> User Dashboard</a>
+   
+  </nav>
+
+  </section>
+<!-- 
+  <h2 style="text-align: center">Multiple</h2>
+<div style="text-align: center">
+  <form >       
+    
+      <div class="file-upload-wrapper">
+        <input type="file" name="images"  multiple (change)="selectMultipleImage($event)" class="file-upload" />
+      </div>
+    <br>
+      <button type="submit" (click)="onMultipleSubmit()">Multiple Upload</button>
+    
+  </form>
+</div> -->
+
+<!-- <div class="frame">
+	<div class="center">
+		<div class="title">
+			<h1>Drop file to upload</h1>
+		</div>
+
+		<div class="dropzone">
+			<img src="http://100dayscss.com/codepen/upload.svg" class="upload-icon" />
+			<input type="file" name="images"  multiple (change)="selectMultipleImage($event)"  class="upload-input" />
+		</div>
+
+		<button class="btn" type="submit" (click)="onMultipleSubmit()">Upload file</button>
+
+	</div>
+</div>
+
+<div class="row">
+  <div class="col-md-8 offset-2">
+      <div class="row d-flex flex-row card">
+          <div class="col-sm-12">
+              <strong>
+                  <h4>Uploaded Files</h4>
+              </strong>
+              <ul style="color: black;" *ngFor="let file of filesList">
+                  
+                      {{file.fileName}}
+                  </ul>
+          </div>
+      </div>
+  </div>
+</div> -->
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container">
+<div class="row">
+    <div class="col-md-3">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content">
+                <div class="file-manager">
+                    <h5>Show:</h5>
+                    <a href="#" class="file-control active">Ale</a>
+                    <a href="#" class="file-control">Documents</a>
+                    <a href="#" class="file-control">Audio</a>
+                    <a href="#" class="file-control">Images</a>
+                    <div class="hr-line-dashed"></div>
+                    <div class="file-upload-wrapper">
+                      <input type="file" name="images"  multiple (change)="selectMultipleImage($event)"  />
+                    </div>
+                    <button type="submit" (click)="onMultipleSubmit()">Upload Files</button>
+                    <div class="hr-line-dashed"></div>
+                    <h5>Folders</h5>
+                    <ul class="folder-list" style="padding: 0">
+                        <li><a href=""><i class="fa fa-folder"></i> Files</a></li>
+                        <li><a href=""><i class="fa fa-folder"></i> Pictures</a></li>
+                        <li><a href=""><i class="fa fa-folder"></i> Web pages</a></li>
+                        <li><a href=""><i class="fa fa-folder"></i> Illustrations</a></li>
+                        <li><a href=""><i class="fa fa-folder"></i> Films</a></li>
+                        <li><a href=""><i class="fa fa-folder"></i> Books</a></li>
+                    </ul>
+                    <h5 class="tag-title">Tags</h5>
+                    <ul class="tag-list" style="padding: 0">
+                        <li><a href="">Family</a></li>
+                        <li><a href="">Work</a></li>
+                        <li><a href="">Home</a></li>
+                        <li><a href="">Children</a></li>
+                        <li><a href="">Holidays</a></li>
+                        <li><a href="">Music</a></li>
+                        <li><a href="">Photography</a></li>
+                        <li><a href="">Film</a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9 animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="file-box">
+                    <div  *ngFor="let file of filesList" class="file">
+                        <a href="#">
+                            <span class="corner"></span>
+
+                            <div class="icon">
+                                <i class="fa fa-file"></i>
+                            </div>
+                            <div class="file-name">
+                              {{file.fileName}}
+                                <br>
+                                <small>{{file.createdAt}}</small>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+                
+
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
