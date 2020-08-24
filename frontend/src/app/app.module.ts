@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HeaderInterceptorService } from './interceptor/header-interceptor.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -11,12 +11,16 @@ import { SignupComponent } from './components/signup/signup.component';
 import { HeaderComponent } from './components/header/header.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
-import { AdminsidebarComponent } from './components/adminsidebar/adminsidebar.component';
+import { AdminsidebarComponent } from './components/admin-sidebar/adminsidebar.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { TermsConditionsComponent } from './components/terms-conditions/terms-conditions.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
+import { FileUploadModule } from 'ng2-file-upload';
+import { ToastrModule } from 'ngx-toastr';
+import { ModalModule } from 'ngx-bootstrap/modal';
+
 
 @NgModule({
   declarations: [
@@ -37,9 +41,14 @@ import { FileUploadComponent } from './components/file-upload/file-upload.compon
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     Ng2SearchPipeModule,
     InfiniteScrollModule,
+    FileUploadModule,
+    ToastrModule.forRoot(),
+    ModalModule.forRoot(),
+
   
   ],
   providers: [

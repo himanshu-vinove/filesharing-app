@@ -12,7 +12,7 @@ exports.addToFriendList = async (req, res, next) => {
     // console.log(user.friendList);
     await User.findByIdAndUpdate(req.userData.id, {
       friendList: user.friendList,
-    });
+    });                                                                                                                                                                                                                                                                                                                                                                                             
     res.status(200).json({ msg: "Added to friendlist" });
   } catch (err) {
     return next(new ErrorResponse(`${err.message}`, 500));
@@ -61,13 +61,8 @@ exports.removefiend = async (req, res, next) =>{
     user.fListData.forEach(element => {
       if (element._id === req.params.id) {
         console.log(element._id);
-      }
-      
+      }  
     });
-   
-    // await User.findByIdAndUpdate(req.userData.id, {
-    //   friendList: user.friendList,
-    // });
     res.status(200).json({ msg: "removed from friend list" });
   } catch (err) {
     return next(new ErrorResponse(`${err.message}`, 500));

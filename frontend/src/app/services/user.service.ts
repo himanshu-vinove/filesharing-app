@@ -81,9 +81,16 @@ export class UserService {
 
 removeFromFriendList(id): any{
     return this.http.delete(`${this.friendUrl}/removefriend/${id}`, id);
-  
-  
 }
+
+shareFile(fileId, email: any): any {
+  return this.http.post(`${this.userUrl}/share/${fileId}`, email);
+}
+
+fetchSFile(): any {
+  return this.http.get(`${this.userUrl}/sharedfiles`);
+}
+
 
 }
 

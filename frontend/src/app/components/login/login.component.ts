@@ -2,6 +2,9 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+
+
 
 @Component({
   selector: 'app-login',
@@ -11,7 +14,7 @@ import { NgForm } from '@angular/forms';
 export class LoginComponent implements OnInit {
   isLoggedIn = false;
   role;
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService,  private toast: ToastrService, private router: Router) { }
 
   ngOnInit(): void {
     this.userService._loginObservable.subscribe(() => {
@@ -36,16 +39,33 @@ export class LoginComponent implements OnInit {
       this.isLoggedIn = this.userService.isLoggedIn();
       const userId = localStorage.getItem('id');
       this.userService.updateOnlineStatus(true, userId).subscribe();
-
-      if (result.role === 'admin' && result.blockedStatus === false){
+      if (result.role === 'admin' && result.blockedStatus === false) {
         this.router.navigate(['adminDashboard']);
-      }
-      else if (result.role === 'user' && result.blockedStatus === false){
+        this.toast.success('Admin Dashboard', 'Welcome to,', {
+          timeOut: 1500,
+          progressBar: true,
+          progressAnimation: 'increasing',
+          positionClass: 'toast-top-right',
+        });
+      } else if (result.role === 'user' && result.blockedStatus === false) {
         this.router.navigate(['userDashboard']);
-      }else {
-        alert('User is blocked');
+        this.toast.success('User Dashboard', 'Welcome to,', {
+          timeOut: 1500,
+          progressBar: true,
+          progressAnimation: 'increasing',
+          positionClass: 'toast-top-right',
+        });
+      } else {
+        this.userService.logout();
+        return this.toast.error('User is Blocked', 'Error', {
+          timeOut: 1500,
+          progressBar: true,
+          progressAnimation: 'increasing',
+          positionClass: 'toast-top-right',
+        });
       }
     });
     form.reset();
   }
+
 }

@@ -1,6 +1,10 @@
 import { UserService } from 'src/app/services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+
 
 
 
@@ -12,10 +16,15 @@ import { Router } from '@angular/router';
 export class UserDashboardComponent implements OnInit {
   users: [];
   friendList = [];
+  sharedWithMe: any = [];
   searchText;
+  username;
+  fileId = '';
   isLoggedIn = true;
   role;
-  constructor(private userService: UserService, private router: Router) { }
+  modalRef: BsModalRef;
+  friendCheck;
+  constructor(private userService: UserService, private toast: ToastrService, private router: Router,  private modalService: BsModalService,) { }
 
   ngOnInit(): void {
     this.getAllUsers();
@@ -32,9 +41,16 @@ export class UserDashboardComponent implements OnInit {
 
   addFriend(id): any {
     this.userService.addToFriendList(id).subscribe(() => {
-      
-      alert('Added ');
+      this.getFriendList();
+      this.toast.success('Added to friendlist', 'Success', {
+        timeOut: 1500,
+        progressBar: true,
+        progressAnimation: 'increasing',
+        positionClass: 'toast-top-right',
+      });
+      this.getFriendList();
     });
+
   }
 
   getFriendList(): any {
@@ -59,6 +75,27 @@ console.log("file sent");
 
   uploadFile(): any{
     this.router.navigate(['fileupload']);
+  }
+
+
+
+  shareFile(event: Event, form: HTMLFormElement): any {
+    event.preventDefault();
+    let email = (<HTMLInputElement>form.elements.namedItem('email')).value;
+    if (!email) {
+      return this.toast.error('Email can\'t be empty', 'Error', {
+        timeOut: 1500,
+        progressBar: true,
+        progressAnimation: 'increasing',
+        positionClass: 'toast-top-right',
+      });;
+    }
+    this.userService.shareFile(this.fileId, { email }).subscribe((data) => {
+      // console.log(data);
+      this.sharedWithMe = data;
+    });
+    this.modalRef.hide();
+    return false;
   }
   
 }

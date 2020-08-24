@@ -1,5 +1,6 @@
 import { UserService } from 'src/app/services/user.service';
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-signup',
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignupComponent implements OnInit {
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService , private toast: ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -36,10 +37,20 @@ export class SignupComponent implements OnInit {
     console.log(data);
 
     this.userService.createUser(data).subscribe(() => {
-      alert('User created successfully!!');
+      this.toast.success(
+        'Verify your email to login',
+        'User created successfully!!',
+        {
+          timeOut: 1500,
+          progressBar: true,
+          progressAnimation: 'increasing',
+          positionClass: 'toast-top-right',
+        }
+      );
       form.reset();
     });
   }
+
 
 }
 

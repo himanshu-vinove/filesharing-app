@@ -7,4 +7,4 @@ mongoose.connect(process.env.MONGODB_URL, {
   useFindAndModify: false,
 });
 
-console.log(`MongoDB Connected...`);
+console.log(`MongoDB Connected successfully`);

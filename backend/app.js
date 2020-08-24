@@ -1,13 +1,16 @@
 const express = require('express');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
+var bodyParser = require('body-parser')
 const cors = require('cors');
-const User = require("./api/models/User");
+var PORT = process.env.PORT || 3000;
+const User = require("./serverapi/models/User");
 const jwt = require('jsonwebtoken');
+// var app = express()
 
-const userRoutes = require('./api/routes/user');
-const friendsRoute = require('./api/routes/friendlist');
-const fileRoutes = require('./api/routes/filedata');
+const userRoutes = require('./serverapi/routes/user');
+const friendsRoute = require('./serverapi/routes/friendlist');
+const fileRoutes = require('./serverapi/routes/filedata');
 
 // Load ENV variable
 dotenv.config({ path: './config/config.env' });
@@ -15,6 +18,14 @@ dotenv.config({ path: './config/config.env' });
 // Connect to DB
 require('./config/db');
 const app = express();
+
+
+app.use(bodyParser.json())
+app.use(
+  bodyParser.urlencoded({
+    extended: false
+  })
+)
 
 // Setup CORS
 app.use(cors());
@@ -34,6 +45,16 @@ if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 
 // Setup static files path
 app.use('/uploads', express.static('uploads'));
+app.use('/uploadedfiles', express.static('uploadedfiles'));
+
+
+
+
+//const server = http.createServer(app);
+
+app.listen(PORT, () => {
+  console.log(`server Running on Port ${PORT}`);
+});
 
 // Mount Routes
 app.use('/api/users', userRoutes);
@@ -50,6 +71,17 @@ app.use('/api/uploads*', (req, res, next) => {
     next();
   }
 });
+
+app.use('/api/uploadedfiles*', (req, res, next) => {
+  try {
+    res.sendFile(__dirname + '/uploadedfiles' + req.params[0]);
+    
+
+  } catch (error) {
+    next();
+  }
+});
+
 // Mail verification
 app.get('/confirmation/:token', async (req, res) => {
   try {

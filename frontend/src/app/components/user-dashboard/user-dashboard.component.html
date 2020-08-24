@@ -61,7 +61,7 @@
     </td>
           <td><b>{{friend.username}}</b></td>
           <td><Button class="btn btn-primary btn-block"
-            (click)="sendFile()">
+            (click)="uploadFile()">
           send File </Button></td>
           <td><Button class="btn btn-secondary btn-block"
             (click)="removeFriend(friend._id)">
@@ -72,3 +72,41 @@
   </div>
  </div>
  </section>
+
+ <ng-template #modalForm>
+  <div class="container">
+    <div class="py-3 text-center">
+      <h2 class="text-dark">Share file</h2>
+    </div>
+
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+        <form #shareForm method="POST" action="javascript:void(0)">
+          <div class="row">
+            <div class="col-md-12 mb-3">
+              <label for="email">Friend's email</label>
+              <input
+                type="text"
+                name="email"
+                class="form-control border-info"
+                id="email"
+                placeholder=""
+                value=""
+                required
+              />
+            </div>
+          </div>
+          <hr class="mb-4" />
+          <button
+            (click)="shareFile($event, shareForm)"
+            class="col-md-3 btn btn-outline-primary btn-block mb-3"
+            type="submit"
+          >
+            Share
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</ng-template>
+

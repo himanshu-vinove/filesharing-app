@@ -1,5 +1,6 @@
 const ErrorResponse = require('../../utils/errorResponse');
 const User = require('../models/User');
+const File = require("../models/Filedata");
 const nodemailer = require("nodemailer");
 
 // Create Single User
@@ -54,7 +55,7 @@ exports.loginUserAndAdmin = async (req, res, next) => {
 
     // check for user
     const user = await User.findOne({ email }).select('+password');
-    // console.log(user);
+  
 
     if (!user) return next(new ErrorResponse('Invalid Credentials', 401));
 
@@ -82,7 +83,7 @@ exports.loginUserAndAdmin = async (req, res, next) => {
 // get All users
 exports.getAllUsers = async (req, res, next) => {
   try {
-    const users = await User.find({});
+    const users = await User.find({ $and : [{_id: { $ne : req.params.id }},{role: 'user'}] });
     if (!users) {
       return next(new ErrorResponse(`No user`, 404));
     }
@@ -136,5 +137,58 @@ exports.getActiveUsers = async(req, res, next) => {
   } catch (err) {
   return next(new ErrorResponse(`${err.message}`, 500));
   }
-}
+};
 
+exports.shareFile = async (req, res, next) => {
+  try {
+    const friendEmail = req.body.email;
+    const fileID = req.params.id;
+    const user = await User.findById(req.userData.id);
+   
+    // checking if file belongs to user or not
+    if (!user.files.includes(fileID)) {
+      return next(new ErrorResponse(`File doesn't belongs to you`, 401));
+    }
+
+    const userToRecieveFile = await User.findOne({
+      email: friendEmail,
+    });
+    // console.log(`user to Recieve -- ${userToRecieveFile._id}`);
+    if (!userToRecieveFile) {
+      return next(new ErrorResponse(`Reciever User doesn't Exist`, 401));
+    }
+
+    const fileToBeShared = await File.findByIdAndUpdate(
+      fileID,
+      { sharedto: [userToRecieveFile._id] },
+      {
+        runValidators: true,
+        new: true,
+      }
+    );
+
+    userToRecieveFile.sharedFile.push(fileToBeShared.fileName);
+
+    await User.findOneAndUpdate({email: req.body.email}, {
+      sharedFile: userToRecieveFile.sharedFile,
+    });
+
+    const updatedUser = await User.findById(req.userData.id);
+
+    res.status(200).json(updatedUser.sharedFile);
+  } catch (err) {
+    return next(new ErrorResponse(`${err.message}`, 500));
+  }
+};
+
+exports.fetchSFile = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.userData.id);
+    if (!user) {
+      return next(new ErrorResponse(`No user`, 404));
+    }
+    res.status(200).json(user.sharedFile);
+  } catch (err) {
+    return next(new ErrorResponse(`${err.message}`, 500));
+  }
+};

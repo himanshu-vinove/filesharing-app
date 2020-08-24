@@ -39,5 +39,8 @@ router.get('/allusers', Auth.adminAuth, userController.getAllUsers);
 router.put('/updateblock/:id', Auth.adminAuth, userController.updateBlock);
 router.put('/updateonlinestatus/:id', userController.updateOnlineStatus);
 router.get('/activeusers', userController.getActiveUsers);
+router.post("/share/:id", Auth.userAuth, userController.shareFile);
+router.get("/sharedfiles", Auth.userAuth, userController.fetchSFile);
+
 
 module.exports = router;

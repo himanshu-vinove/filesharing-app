@@ -1,4 +1,4 @@
-import { UserAuthGuardService } from 'src/app/auth-guard/user-auth-guard.service';
+import { UserAuthGuardService } from 'src/app/authantication-guard/u-auth-guard.service';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { NgModule } from '@angular/core';
