@@ -31,11 +31,8 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(form: NgForm): any {
-    // console.log(form.value);
-
+    
     this.userService.login(form.value).subscribe((result: any) => {
-      // this.navigateToDashboard()
-      // console.log(result.role);
       this.isLoggedIn = this.userService.isLoggedIn();
       const userId = localStorage.getItem('id');
       this.userService.updateOnlineStatus(true, userId).subscribe();
@@ -49,20 +46,10 @@ export class LoginComponent implements OnInit {
         });
       } else if (result.role === 'user' && result.blockedStatus === false) {
         this.router.navigate(['userDashboard']);
-        this.toast.success('User Dashboard', 'Welcome to,', {
-          timeOut: 1500,
-          progressBar: true,
-          progressAnimation: 'increasing',
-          positionClass: 'toast-top-right',
-        });
+        this.toast.success('User Dashboard', 'Welcome to');
       } else {
         this.userService.logout();
-        return this.toast.error('User is Blocked', 'Error', {
-          timeOut: 1500,
-          progressBar: true,
-          progressAnimation: 'increasing',
-          positionClass: 'toast-top-right',
-        });
+        return this.toast.error('User is Blocked', 'Error');
       }
     });
     form.reset();

@@ -2,7 +2,7 @@
    
   
   
-  <nav  class="navbar navbar-expand-lg navbar-dark bgcolor" style="background:rgb(34, 80, 178)" width="100%"><a href="#" class="navbar-brand">
+  <nav  class="navbar navbar-expand-lg navbar-dark bgcolor" style="background:rgb(34, 80, 178)" width="100%"><a href="" class="navbar-brand">
     <img src="https://thumbs.dreamstime.com/z/rocket-idea-icon-logo-design-element-can-be-used-as-as-complement-to-95682747.jpg" height="28" alt="CoolBrand">
   </a>
   <a class="navbar-brand" routerLink="" style="color: aliceblue;"> User Dashboard</a>
@@ -20,8 +20,8 @@
             <div class="ibox-content">
                 <div class="file-manager">
                     <h5>Show:</h5>
-                    <a href="#" class="file-control active">Ale</a>
-                    <a href="#" class="file-control">Documents</a>
+                    <a href="" class="file-control active">Ale</a>
+                    <a href="" class="file-control">Documents</a>
                     <a href="#" class="file-control">Audio</a>
                     <a href="#" class="file-control">Images</a>
                     <div class="hr-line-dashed"></div>
@@ -54,6 +54,25 @@
                         <li><a href="">Film</a></li>
                     </ul>
                     <div class="clearfix"></div>
+                    <button
+                    class="btn-sm m-1 border-dark col-md-6 btn-outline-primary"
+                    (click)="toggleformat(shared ? 'true' : 'false')"
+                    (click)="fetchSFile()"  width  ="100%"
+                  >
+                    Shared with me
+                  </button>
+                    <div *ngIf="!uploadfile" class="col-md-12">
+                      <strong>
+                        <h4>Files Shared with me</h4>
+                      </strong>
+                      <hr />
+                      <ul>
+                        <li *ngFor="let file of sharedWithMe" class="d-flex flex-row m-1">
+                          <div class="col-md-12"><a href="http://127.0.0.1:3000/api/uploadedfiles/{{ file }}" class="nav-link"
+                            target="blank">{{ file }}</a></div>
+                        </li>
+                      </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -95,7 +114,7 @@
 
 
 
-<div class="row">
+<!-- <div class="row">
     <div class="col-md-10 offset-1">
       <div class="row d-flex flex-row">
         <button
@@ -113,12 +132,13 @@
         </button>
       </div>
     </div>
-  </div>
+  </div> -->
 
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-md-10 offset-1">
-      <div class="row d-flex flex-row card">
-        <div *ngIf="uploadfile" class="col-md-12">
+      <div class="container"> -->
+      <!-- <div class="row d-flex flex-row card"> -->
+        <!-- <div *ngIf="uploadfile" class="col-md-12">
           <strong>
             <h4>Uploaded Files</h4>
           </strong>
@@ -134,8 +154,8 @@
               </button>
             </li>
           </ul>
-        </div>
-        <div *ngIf="!uploadfile" class="col-md-12">
+        </div> -->
+        <!-- <div *ngIf="!uploadfile" class="col-md-12">
           <strong>
             <h4>Files Shared with me</h4>
           </strong>
@@ -149,7 +169,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
 
 

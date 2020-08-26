@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class SignupComponent implements OnInit {
 
-  constructor(private userService: UserService , private toast: ToastrService) { }
+  constructor(private userService: UserService, private toast: ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -19,15 +19,12 @@ export class SignupComponent implements OnInit {
     const email = (form.elements.namedItem('email') as HTMLInputElement).value;
     const password = (form.elements.namedItem('password') as HTMLInputElement).value;
     const profile = ((form.elements.namedItem('profile')) as HTMLInputElement).files[0];
-    // console.log(profile);
     const values = {
       username,
       email,
       password,
       profile
     };
-
-    console.log(values);
 
     const data = new FormData();
     data.append('username', username);
@@ -39,18 +36,10 @@ export class SignupComponent implements OnInit {
     this.userService.createUser(data).subscribe(() => {
       this.toast.success(
         'Verify your email to login',
-        'User created successfully!!',
-        {
-          timeOut: 1500,
-          progressBar: true,
-          progressAnimation: 'increasing',
-          positionClass: 'toast-top-right',
-        }
+        'User created successfully!!'
       );
       form.reset();
     });
   }
-
-
 }
 

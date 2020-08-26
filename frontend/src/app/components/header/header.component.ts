@@ -14,7 +14,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.role = localStorage.getItem('role');
-    // this.isLoggedIn = this.userService.isLoggedIn();
     this.userService._loginObservable.subscribe(() => {
       const token = this.userService.getToken();
       if (token !== '') {
@@ -24,7 +23,6 @@ export class HeaderComponent implements OnInit {
         this.isLoggedIn = false;
       }
     });
-    // console.log(this.isLoggedIn);
   }
 
   logout(): any {
@@ -33,6 +31,5 @@ export class HeaderComponent implements OnInit {
     this.userService.logout();
     this.router.navigate(['']);
     this.isLoggedIn = this.userService.isLoggedIn();
-    // console.log(this.isLoggedIn);
   }
 }

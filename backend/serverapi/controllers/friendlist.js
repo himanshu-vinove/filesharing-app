@@ -1,7 +1,7 @@
 const ErrorResponse = require("../../utils/errorResponse");
 const User = require("../models/User");
 
-// Adding in friend List
+// Adding to friend List
 exports.addToFriendList = async (req, res, next) => {
   try {
     const user = await User.findById(req.userData.id);
@@ -9,7 +9,6 @@ exports.addToFriendList = async (req, res, next) => {
       return next(new ErrorResponse(`No user`, 404));
     }
     user.friendList.push(req.params.id);
-    // console.log(user.friendList);
     await User.findByIdAndUpdate(req.userData.id, {
       friendList: user.friendList,
     });                                                                                                                                                                                                                                                                                                                                                                                             
@@ -41,7 +40,6 @@ exports.getFriendList = async (req, res, next) => {
     await User.findByIdAndUpdate(req.userData.id, {
       friendList: updatedUser.friendList,
     });
-    // console.log(updatedUser.fListData);
     res.status(200).json(updatedUser.fListData);
   } catch (err) {
     return next(new ErrorResponse(`${err.message}`, 500));

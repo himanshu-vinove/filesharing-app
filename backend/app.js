@@ -6,7 +6,7 @@ const cors = require('cors');
 var PORT = process.env.PORT || 3000;
 const User = require("./serverapi/models/User");
 const jwt = require('jsonwebtoken');
-// var app = express()
+
 
 const userRoutes = require('./serverapi/routes/user');
 const friendsRoute = require('./serverapi/routes/friendlist');
@@ -15,7 +15,7 @@ const fileRoutes = require('./serverapi/routes/filedata');
 // Load ENV variable
 dotenv.config({ path: './config/config.env' });
 
-// Connect to DB
+// Connect to Database
 require('./config/db');
 const app = express();
 

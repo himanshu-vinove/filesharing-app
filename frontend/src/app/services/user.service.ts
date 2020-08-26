@@ -7,14 +7,14 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  userUrl = 'http://127.0.0.1:3000/api/users';
-  friendUrl = 'http://127.0.0.1:3000/api/friends';
+  userUrl = 'http://localhost:3000/api/users';
+  friendUrl = 'http://localhost:3000/api/friends';
   loginObservable: BehaviorSubject<{}>;
   constructor(private http: HttpClient) {
     this.loginObservable = new BehaviorSubject({});
   }
 
-  // Getter method used to subscribe data during login and logout
+  // Get method used to subscribe data during login and logout
   public get _loginObservable(): any {
     return this.loginObservable;
   }

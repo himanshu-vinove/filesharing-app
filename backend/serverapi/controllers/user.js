@@ -3,7 +3,7 @@ const User = require('../models/User');
 const File = require("../models/Filedata");
 const nodemailer = require("nodemailer");
 
-// Create Single User
+// Create a Single User
 exports.createUser = async (req, res, next) => {
   try {
     const user = {
@@ -14,7 +14,7 @@ exports.createUser = async (req, res, next) => {
     }
     const createdUser = await User.create(user);
     const emailToken = createdUser.getSignedJwtToken();
-    // console.log(emailToken);
+   
     const url = `http://localhost:3000/confirmation/${emailToken}`;
 
     let testAccount = await nodemailer.createTestAccount();
@@ -25,13 +25,13 @@ exports.createUser = async (req, res, next) => {
         pass: "db01923d832292",
       },
     });
-    let mail = await transporter.sendMail({
+     await transporter.sendMail({
       from: testAccount.user,
       to: req.body.email,
       subject: "Confirm Email",
-      html: `Please click this link to confirm your email: <a href="${url}">${url}</a>`,
+      html: `Please confirm your email: <a href="${url}">${url}</a>`,
     });
-    // console.log(mail);
+   
     res.status(201).json({
       msg: "User Created Successfully",
     });
@@ -66,7 +66,6 @@ exports.loginUserAndAdmin = async (req, res, next) => {
 
     const token = user.getSignedJwtToken();
 
-    // console.log(token);
     res.status(200).json({
       msg: 'User logged in',
       token,
@@ -87,7 +86,6 @@ exports.getAllUsers = async (req, res, next) => {
     if (!users) {
       return next(new ErrorResponse(`No user`, 404));
     }
-    // console.log(users);
     res.status(200).json(users);
   } catch (err) {
   return next(new ErrorResponse(`${err.message}`, 500));

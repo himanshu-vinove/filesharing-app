@@ -19,6 +19,7 @@ export class FileUploadComponent implements OnInit {
   sharedWithMe: any = [];
   uploadfile = true;
   fileId = '';
+  shared = false;
   modalRef: BsModalRef;
   images;
   multipleImages:any  = [];
@@ -47,7 +48,7 @@ private router:Router , private userService: UserService  ){}
     }
     form.reset();
 
-    this.http.post<any>('http://127.0.0.1:3000/api/files/fileupload', formData).subscribe(
+    this.http.post<any>('http://localhost:3000/api/files/fileupload', formData).subscribe(
       (res) =>{ console.log(res)
         this.fetchUploadFiles();},
       (err) => console.log(err)
@@ -58,23 +59,24 @@ private router:Router , private userService: UserService  ){}
 
   fetchUploadFiles(): any {
     this.http
-      .get<any>('http://127.0.0.1:3000/api/files/getuploadedfile')
+      .get<any>('http://localhost:3000/api/files/getuploadedfile')
       .subscribe(
         (files) => {
-          // console.log(files);
           this.filesList = files;
         },
         (err) => console.log(err)
       );
   }
 
-  toggleformat(data: any): any {
-    if (data === 'uploadfile') {
-      this.uploadfile = true;
-    } else {
+  toggleformat(shared): any {
+    if (shared === 'false'){
       this.uploadfile = false;
-    }
+      }
+      else{
+        this.uploadfile =true;
+      }
   }
+ 
 
   //open model
   openModel(fileId, form): any {
@@ -97,7 +99,6 @@ private router:Router , private userService: UserService  ){}
       });;
     }
     this.userService.shareFile(this.fileId, { email }).subscribe((data) => {
-      // console.log(data);
       this.sharedWithMe = data;
     });
     this.modalRef.hide();

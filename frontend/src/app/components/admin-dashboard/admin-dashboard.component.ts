@@ -11,7 +11,7 @@ export class AdminDashboardComponent implements OnInit {
   users = [];
   activeUsers = [];
   searchText;
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
     this.getAllUsers();
@@ -25,24 +25,24 @@ export class AdminDashboardComponent implements OnInit {
     });
   }
 
+  onScroll() {
+    console.log('scrolled!!');
+  }
+
   toggleBlockedState(blockState, id): any {
     blockState = !blockState;
-    this.userService.updateBlockState(blockState, id).subscribe(() =>{
+    this.userService.updateBlockState(blockState, id).subscribe(() => {
       this.getAllUsers();
     });
   }
 
   getActiveUsers(): any {
     this.userService.getActiveUsers().subscribe((active) => {
-      // console.log(active);
       this.activeUsers = active;
-      // this.getActiveUsers();
     });
   }
 
-  onScroll() {
-    console.log('scrolled!!');
-  }
- 
+
+
 
 }

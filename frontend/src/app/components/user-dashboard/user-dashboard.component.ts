@@ -2,10 +2,7 @@ import { UserService } from 'src/app/services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-
-
 
 
 @Component({
@@ -34,7 +31,6 @@ export class UserDashboardComponent implements OnInit {
 
   getAllUsers(): any {
     this.userService.getAllUsers().subscribe((users) => {
-      // console.log(users);
       this.users = users;
     });
   }
@@ -55,7 +51,6 @@ export class UserDashboardComponent implements OnInit {
 
   getFriendList(): any {
     this.userService.getFriendList().subscribe((list) => {
-      //this.getFriendList();
       this.friendList = list;
     });
   }
@@ -78,20 +73,13 @@ console.log("file sent");
   }
 
 
-
   shareFile(event: Event, form: HTMLFormElement): any {
     event.preventDefault();
     let email = (<HTMLInputElement>form.elements.namedItem('email')).value;
     if (!email) {
-      return this.toast.error('Email can\'t be empty', 'Error', {
-        timeOut: 1500,
-        progressBar: true,
-        progressAnimation: 'increasing',
-        positionClass: 'toast-top-right',
-      });;
+      return this.toast.error('Email can\'t be empty', 'Error');
     }
     this.userService.shareFile(this.fileId, { email }).subscribe((data) => {
-      // console.log(data);
       this.sharedWithMe = data;
     });
     this.modalRef.hide();
